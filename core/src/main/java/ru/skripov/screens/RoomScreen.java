@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class RoomScreen extends ScreenAdapter {
+public class RoomScreen extends CommonScreen {
     private final Main game;
     private ShapeRenderer shapeRenderer;
     private SpriteBatch batch;
@@ -81,11 +81,7 @@ public class RoomScreen extends ScreenAdapter {
     @Override
     public void render(float delta) {
         if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
-            if (gameOver) {
-                game.setScreen(new GameOverScreen(game, player.score));
-            } else {
-                game.setScreen(new MenuScreen(game));
-            }
+            game.setScreen(new MenuScreen(game));
             return;
         }
 
@@ -95,7 +91,9 @@ public class RoomScreen extends ScreenAdapter {
 
     private void update(float delta) {
         if (delta > 0.05f) delta = 0.05f;
-        if (gameOver) return;
+        if (gameOver) {
+            return;
+        }
 
         player.update(delta);
         updateDeathEffects(delta);
@@ -405,5 +403,12 @@ public class RoomScreen extends ScreenAdapter {
         shapeRenderer.dispose();
         batch.dispose();
         font.dispose();
+    }
+
+    @Override
+    public void show() {
+        // Когда возвращаемся в игру (Continue) — InputProcessor уже для клавиш не нужен,
+        // но если бы был UI в игре (пауза-меню), здесь бы мы его восстановили.
+        // Пока пусто, клавиши обрабатываются через Gdx.input в update()
     }
 }

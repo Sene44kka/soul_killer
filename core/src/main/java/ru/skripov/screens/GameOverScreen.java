@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.GL20;
 import ru.skripov.Main;
 import ru.skripov.ui.GameOverUI;
 
-public class GameOverScreen extends ScreenAdapter {
+public class GameOverScreen extends CommonScreen {
     private final Main game;
     private GameOverUI gameOverUI;
 

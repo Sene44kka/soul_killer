@@ -5,7 +5,7 @@ import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
 import ru.skripov.Main;
 
-public class LoadingScreen extends ScreenAdapter {
+public class LoadingScreen extends CommonScreen {
     private final Main game;
 
     public LoadingScreen(Main game) {

@@ -6,14 +6,13 @@ import com.badlogic.gdx.graphics.GL20;
 import ru.skripov.Main;
 import ru.skripov.ui.MenuUI;
 
-public class MenuScreen extends ScreenAdapter {
+public class MenuScreen extends CommonScreen {
     private final Main game;
     private final MenuUI menuUI;
 
     public MenuScreen(Main game) {
         this.game = game;
-
-        menuUI = new MenuUI(new MenuUI.MenuListener() {
+        this.menuUI = new MenuUI(new MenuUI.MenuListener() {
             @Override
             public void onNewGame() {
                 System.out.println("=== NEW GAME ===");
