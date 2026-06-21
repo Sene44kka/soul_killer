@@ -12,15 +12,10 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
 public class GameOverUI {
-    private Stage stage;
+    private final Stage stage;
     private Skin skin;
-    private Label titleLabel;
-    private Label scoreLabel;
-    private Label soulsLabel;
-    private TextButton newGameButton;
-    private TextButton mainMenuButton;
 
-    private GameOverListener listener;
+    private final GameOverListener listener;
 
     public interface GameOverListener {
         void onNewGame();
@@ -28,9 +23,8 @@ public class GameOverUI {
     }
 
     public GameOverUI(int score, GameOverListener listener) {
-        this.listener = listener;
         stage = new Stage();
-        Gdx.input.setInputProcessor(stage);
+        this.listener = listener;
 
         createSkin();
         createUI(score);
@@ -97,19 +91,19 @@ public class GameOverUI {
         table.center();
 
         // Заголовок
-        titleLabel = new Label("SOUL SHATTERED", skin, "title");
+        Label titleLabel = new Label("SOUL SHATTERED", skin, "title");
         table.add(titleLabel).padBottom(40).row();
 
         // Текст "Souls collected"
-        soulsLabel = new Label("Souls collected:", skin, "default");
+        Label soulsLabel = new Label("Souls collected:", skin, "default");
         table.add(soulsLabel).padBottom(10).row();
 
         // Очки
-        scoreLabel = new Label(String.valueOf(score), skin, "score");
+        Label scoreLabel = new Label(String.valueOf(score), skin, "score");
         table.add(scoreLabel).padBottom(50).row();
 
         // Кнопка New Game
-        newGameButton = new TextButton("NEW GAME", skin);
+        TextButton newGameButton = new TextButton("NEW GAME", skin);
         newGameButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
@@ -119,7 +113,7 @@ public class GameOverUI {
         table.add(newGameButton).width(250).height(60).padBottom(15).row();
 
         // Кнопка Main Menu
-        mainMenuButton = new TextButton("MAIN MENU", skin);
+        TextButton mainMenuButton = new TextButton("MAIN MENU", skin);
         mainMenuButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
@@ -143,5 +137,13 @@ public class GameOverUI {
     public void dispose() {
         stage.dispose();
         skin.dispose();
+    }
+
+    public void show() {
+        Gdx.input.setInputProcessor(stage);
+    }
+
+    public void hide() {
+        Gdx.input.setInputProcessor(stage);
     }
 }

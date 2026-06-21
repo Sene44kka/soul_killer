@@ -3,15 +3,17 @@ package ru.skripov.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import ru.skripov.Main;
 import ru.skripov.ui.GameOverUI;
 
-public class GameOverScreen extends CommonScreen {
+public class GameOverScreen extends ScreenAdapter {
     private final Main game;
     private GameOverUI gameOverUI;
 
     public GameOverScreen(Main game, int score) {
         this.game = game;
+
         this.gameOverUI = new GameOverUI(score, new GameOverUI.GameOverListener() {
             @Override
             public void onNewGame() {
@@ -25,6 +27,11 @@ public class GameOverScreen extends CommonScreen {
                 game.setScreen(new MenuScreen(game));
             }
         });
+    }
+
+    @Override
+    public void show() {
+        gameOverUI.show();
     }
 
     @Override
@@ -42,5 +49,10 @@ public class GameOverScreen extends CommonScreen {
     @Override
     public void dispose() {
         gameOverUI.dispose();
+    }
+
+    @Override
+    public void hide() {
+        gameOverUI.hide();
     }
 }

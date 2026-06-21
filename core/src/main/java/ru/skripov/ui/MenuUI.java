@@ -33,7 +33,6 @@ public class MenuUI {
     public MenuUI(MenuListener listener) {
         this.listener = listener;
         stage = new Stage();
-        Gdx.input.setInputProcessor(stage);
 
         createSkin();
         createUI();
@@ -173,5 +172,13 @@ public class MenuUI {
 
     public void setContinueEnabled(boolean enabled) {
         continueButton.setDisabled(!enabled);
+    }
+
+    public void show() {
+        Gdx.input.setInputProcessor(stage);
+    }
+
+    public void hide() {
+        Gdx.input.setInputProcessor(stage);
     }
 }

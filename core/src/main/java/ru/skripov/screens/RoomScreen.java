@@ -9,21 +9,26 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import ru.skripov.Main;
 import ru.skripov.entities.*;
+import ru.skripov.ui.RoomUI;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class RoomScreen extends CommonScreen {
+public class RoomScreen extends ScreenAdapter {
+    private Stage stage;
+    private final RoomUI roomUI;
+
     private final Main game;
-    private ShapeRenderer shapeRenderer;
-    private SpriteBatch batch;
-    private BitmapFont font;
+    private final ShapeRenderer shapeRenderer;
+    private final SpriteBatch batch;
+    private final BitmapFont font;
 
     // Player
-    private Player player;
+    private final Player player;
 
     // Soul Particles
     private final List<SoulParticle> particles;
@@ -31,12 +36,12 @@ public class RoomScreen extends CommonScreen {
     private final float baseFireRate = 0.35f;
 
     // Enemies
-    private List<Enemy> enemies;
+    private final List<Enemy> enemies;
     private float spawnTimer = 0f;
     private float spawnInterval = 1.5f;
 
     // Effects
-    private List<HitEffect> deathEffects;
+    private final List<HitEffect> deathEffects;
 
     // Room dimensions
     private final float wallThickness = 20f;
@@ -52,6 +57,8 @@ public class RoomScreen extends CommonScreen {
 
     public RoomScreen(Main game) {
         this.game = game;
+        this.roomUI = new RoomUI();
+
         this.shapeRenderer = new ShapeRenderer();
         this.batch = new SpriteBatch();
         this.font = new BitmapFont();
@@ -72,6 +79,11 @@ public class RoomScreen extends CommonScreen {
 
         game.setActiveRoomScreen(this);
         System.out.println("=== THE ROOM AWAKENS ===");
+    }
+
+    @Override
+    public void show() {
+        roomUI.show();
     }
 
     public boolean isGameOver() {
@@ -406,9 +418,7 @@ public class RoomScreen extends CommonScreen {
     }
 
     @Override
-    public void show() {
-        // Когда возвращаемся в игру (Continue) — InputProcessor уже для клавиш не нужен,
-        // но если бы был UI в игре (пауза-меню), здесь бы мы его восстановили.
-        // Пока пусто, клавиши обрабатываются через Gdx.input в update()
+    public void hide() {
+        roomUI.hide();
     }
 }
