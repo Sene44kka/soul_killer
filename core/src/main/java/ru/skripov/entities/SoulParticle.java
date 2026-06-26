@@ -1,5 +1,6 @@
 package ru.skripov.entities;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 
@@ -30,13 +31,16 @@ public class SoulParticle {
     }
 
     public void update(float delta) {
+        float screenWidth = Level.LEVEL_SIZE;
+        float screenHeight = Level.LEVEL_SIZE;
+
         bounds.x += velocityX * delta;
         bounds.y += velocityY * delta;
         lifeTimer -= delta;
 
         // Частица умирает, если вышла за экран или истекло время жизни
-        if (bounds.x < -SIZE || bounds.x > 480 ||
-            bounds.y < -SIZE || bounds.y > 320 ||
+        if (bounds.x < -SIZE || bounds.x > screenWidth ||
+            bounds.y < -SIZE || bounds.y > screenHeight ||
             lifeTimer <= 0) {
             alive = false;
         }

@@ -103,7 +103,7 @@ public class MenuUI {
         table.center();
 
         // Заголовок
-        titleLabel = new Label("SOULFIRE", skin, "title");
+        titleLabel = new Label("SOUL KILLER", skin, "title");
         table.add(titleLabel).padBottom(60).row();
 
         // Кнопка New Game

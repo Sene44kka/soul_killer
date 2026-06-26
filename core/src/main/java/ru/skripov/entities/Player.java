@@ -12,7 +12,7 @@ public class Player {
 
     // Health
     public int maxHealth = 3;
-    public int health = 3;
+    public int health = 300000000;
 
     // Invincibility frames
     public float invincibleTimer = 0f;
@@ -60,7 +60,9 @@ public class Player {
     }
 
     public void takeDamage() {
-        if (isInvincible) return;
+        if (isInvincible) {
+            return;
+        }
 
         health--;
 
